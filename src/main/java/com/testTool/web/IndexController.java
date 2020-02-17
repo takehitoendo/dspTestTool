@@ -13,9 +13,12 @@ public class IndexController {
         return "index";
     }
 
-//    @RequestMapping(value = "hoge", method = RequestMethod.GET)
-//    public String hoge(Model model) {
+
+//    @RequestMapping(value = "sendMockRequest", method = RequestMethod.GET)
+//    public String sendMockRequest(Model model) {
 //        int width = 300;
 //        int height = 200;
 //    }
+
+
 }
