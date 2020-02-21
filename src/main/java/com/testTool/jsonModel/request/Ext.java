@@ -8,6 +8,6 @@ public class Ext {
 
     @SerializedName("xff")
     @Expose
-    public String xff;
+    public final String xff = "";
 
 }

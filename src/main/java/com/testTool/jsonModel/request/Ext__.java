@@ -8,6 +8,6 @@ public class Ext__ {
 
     @SerializedName("sessiondepth")
     @Expose
-    public Integer sessiondepth;
+    public final Integer sessiondepth = 0;
 
 }

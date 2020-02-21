@@ -8,6 +8,6 @@ public class Publisher {
 
     @SerializedName("id")
     @Expose
-    public String id;
+    public final String id = "0";
 
 }

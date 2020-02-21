@@ -11,4 +11,9 @@ public class Ext_ {
     @Expose
     public List<Size> sizes = null;
 
+    Ext_(Integer width, Integer height) {
+        Size size = new Size(width, height);
+        sizes.add(size);
+    }
+
 }

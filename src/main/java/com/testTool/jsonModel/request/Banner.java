@@ -10,23 +10,36 @@ public class Banner {
     @SerializedName("api")
     @Expose
     public List<Object> api = null;
+
     @SerializedName("battr")
     @Expose
     public List<Object> battr = null;
+
     @SerializedName("ext")
     @Expose
     public Ext_ ext;
+
     @SerializedName("h")
     @Expose
-    public Integer h;
+    public Integer height;
+
     @SerializedName("pos")
     @Expose
     public Integer pos;
+
     @SerializedName("topframe")
     @Expose
-    public Integer topframe;
+    public final Integer topframe = 0;
+
     @SerializedName("w")
     @Expose
-    public Integer w;
+    public Integer width;
+
+    Banner(Integer width, Integer height, Integer position) {
+        this.width = width;
+        this.height = height;
+        this.ext = new Ext_(this.width, this.height);
+        this.pos = position;
+    }
 
 }

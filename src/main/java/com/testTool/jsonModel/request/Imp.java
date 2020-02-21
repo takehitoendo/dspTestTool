@@ -10,20 +10,29 @@ public class Imp {
     @SerializedName("banner")
     @Expose
     public Banner banner;
+
     @SerializedName("id")
     @Expose
-    public String id;
+    public final String id = "1";
+
     @SerializedName("iframebuster")
     @Expose
-    public List<Object> iframebuster = null;
+    public final List<Object> iframebuster = null;
+
     @SerializedName("instl")
     @Expose
-    public Integer instl;
+    public final Integer instl = 0;
+
     @SerializedName("secure")
     @Expose
-    public Integer secure;
+    public final Integer secure = 0;
+
     @SerializedName("tagid")
     @Expose
-    public String tagid;
+    public final String tagid = "1004";
+
+    Imp(Integer width, Integer height, Integer position) {
+        this.banner = new Banner(width, height, position);
+    }
 
 }

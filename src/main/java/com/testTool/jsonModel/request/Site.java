@@ -1,6 +1,7 @@
 
 package com.testTool.jsonModel.request;
 
+import java.util.Arrays;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,21 +10,26 @@ public class Site {
 
     @SerializedName("cat")
     @Expose
-    public List<String> cat = null;
+    public final List<String> cat = Arrays.asList("IAB12-2");
+
     @SerializedName("domain")
     @Expose
-    public String domain;
+    public final String domain = "flukiest.com";
+
     @SerializedName("id")
     @Expose
-    public String id;
+    public final String id = "1001";
+
     @SerializedName("name")
     @Expose
-    public String name;
+    public final String name = "Flukiest";
+
     @SerializedName("page")
     @Expose
-    public String page;
+    public final String page = "http://integration.rubiconproject.com/rtb/request";
+
     @SerializedName("publisher")
     @Expose
-    public Publisher publisher;
+    public final Publisher publisher = new Publisher();
 
 }

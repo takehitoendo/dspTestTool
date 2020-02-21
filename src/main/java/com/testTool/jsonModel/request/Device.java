@@ -8,27 +8,38 @@ public class Device {
 
     @SerializedName("connectiontype")
     @Expose
-    public Integer connectiontype;
+    public final Integer connectiontype = 0;
+
     @SerializedName("devicetype")
     @Expose
-    public Integer devicetype;
+    public final Integer devicetype = 2;
+
     @SerializedName("ext")
     @Expose
-    public Ext ext;
+    public final Ext ext = new Ext() ;
+
     @SerializedName("geo")
     @Expose
-    public Geo geo;
+    public final Geo geo = new Geo();
+
     @SerializedName("ip")
     @Expose
     public String ip;
+
     @SerializedName("js")
     @Expose
-    public Integer js;
+    public final Integer js = 1;
+
     @SerializedName("language")
     @Expose
-    public String language;
+    public final String language = "ja";
+
     @SerializedName("ua")
     @Expose
     public String ua;
 
+    Device(String ip, String userAgent) {
+        this.ip = ip;
+        this.ua = userAgent;
+    }
 }

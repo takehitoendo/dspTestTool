@@ -8,9 +8,10 @@ public class Geo {
 
     @SerializedName("country")
     @Expose
-    public String country;
+    public final String country = "JPN";
+
     @SerializedName("region")
     @Expose
-    public String region;
+    public final String region = "JP";
 
 }
