@@ -1,6 +1,7 @@
 
 package com.testTool.jsonModel.request;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,11 +10,11 @@ public class Banner {
 
     @SerializedName("api")
     @Expose
-    public List<Object> api = null;
+    public List<Object> api = new ArrayList<>();
 
     @SerializedName("battr")
     @Expose
-    public List<Object> battr = null;
+    public List<Object> battr = new ArrayList<>();
 
     @SerializedName("ext")
     @Expose

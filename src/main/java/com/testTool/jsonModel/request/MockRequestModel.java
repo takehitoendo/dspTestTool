@@ -1,11 +1,12 @@
 
 package com.testTool.jsonModel.request;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MockRequest {
+public class MockRequestModel {
     // definition of variables
     @SerializedName("at")
     @Expose
@@ -21,7 +22,7 @@ public class MockRequest {
 
     @SerializedName("imp")
     @Expose
-    public List<Imp> imp = null;
+    public List<Imp> imp = new ArrayList<>();
 
     @SerializedName("site")
     @Expose
@@ -35,7 +36,7 @@ public class MockRequest {
     @Expose
     public final User user = new User();
 
-    MockRequest(Integer width, Integer height, Integer position, String ip, String impId, String userAgent) {
+    public MockRequestModel(Integer width, Integer height, Integer position, String ip, String impId, String userAgent) {
         this.device = new Device(ip, userAgent);
         this.impId = impId;
         this.imp.add(new Imp(width, height, position));

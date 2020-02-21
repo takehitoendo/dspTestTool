@@ -1,6 +1,7 @@
 
 package com.testTool.jsonModel.request;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -17,7 +18,7 @@ public class Imp {
 
     @SerializedName("iframebuster")
     @Expose
-    public final List<Object> iframebuster = null;
+    public final List<Object> iframebuster = new ArrayList<>();
 
     @SerializedName("instl")
     @Expose
