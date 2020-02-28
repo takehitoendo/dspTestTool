@@ -1,5 +1,5 @@
 
-package com.testTool.jsonModel.request;
+package com.testTool.domain.jsonModel.request;
 
 import java.util.Arrays;
 import java.util.List;

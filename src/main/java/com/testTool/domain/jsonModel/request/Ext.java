@@ -1,5 +1,5 @@
 
-package com.testTool.jsonModel.request;
+package com.testTool.domain.jsonModel.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
