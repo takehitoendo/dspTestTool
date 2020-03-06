@@ -11,7 +11,6 @@ import sun.net.www.http.HttpClient;
 // import module from java
 import java.io.IOException;
 import java.util.Objects;
-import java.util.UUID;
 
 @Getter
 public class Request {
@@ -26,17 +25,13 @@ public class Request {
         Integer position = 1;
         String ip = "60.193.223.46";
         String targetDeviceString = "MOBILE";
-        String serverId = "sdapi04";
+        String targetServerId = "sdapi04";
 
         // initialize targetServer
-        targetServer = ServerType.getById(serverId);
+        targetServer = ServerType.getById(targetServerId);
 
         // initialize impId
-        StringBuilder builder = new StringBuilder();
-        UUID uuid1 = UUID.randomUUID();
-        UUID uuid2 = UUID.randomUUID();
-        String[] uuid3 = {uuid1.toString(), "-", uuid2.toString(), "-000000000000"};
-        String impId = String.join("", uuid3);
+        String impId = ImpIdBuilder.build();
 
         // initialize userAgent
         TargetDeviceType targetDevice = TargetDeviceType.valueOf(targetDeviceString);
@@ -49,14 +44,6 @@ public class Request {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         requestJson = Objects.requireNonNull(gson.toJson(model));
     }
-
-    public void execute() {
-
-    }
-
-//    private Boolean canPost() {
-//        return StringUtils.isNotEmpty(requestJson);
-//    }
 
     private String post() throws IOException {
         OkHttpPostClient client = new OkHttpPostClient(targetServer, requestJson);

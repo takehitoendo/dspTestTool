@@ -3,6 +3,8 @@ package com.testTool.domain;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -14,6 +16,12 @@ enum ServerType {
     // Field Definition
     String serverId;
     String domain;
+
+    public URL getURL() throws MalformedURLException {
+        String targetServerDomain = getDomain();
+        String endpointString = "http://" + targetServerDomain + "/dsp/api/bid/s/s/rubicon";
+        return new URL(endpointString);
+    }
 
     public static ServerType getById(String serverId) {
         return Arrays.stream(ServerType.values())
