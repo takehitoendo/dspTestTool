@@ -3,7 +3,7 @@ package com.testTool.domain.jsonModel.request;
 import java.util.UUID;
 
 public class ImpIdBuilder {
-    
+
     static String build() {
         StringBuffer impId = new StringBuffer();
 

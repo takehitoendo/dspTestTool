@@ -1,4 +1,4 @@
-package com.testTool.domain;
+package com.testTool.domain.Request;
 
 // import modules from external libraries
 import com.google.gson.Gson;
@@ -13,7 +13,7 @@ import java.util.Objects;
 
 @Getter
 public class Request {
-    private final String requestJson;
+    private final MockRequestModel request;
     private final ServerType targetServer;
 
     public Request() {
@@ -24,7 +24,7 @@ public class Request {
         Integer position = 1;
         String ip = "60.193.223.46";
         String targetDeviceTypeString = "MOBILE";
-        String targetServerId = "sdapi04";
+        String targetServerId = "sdapi01";
 
         // initialize targetServer
         targetServer = ServerType.getById(targetServerId);
@@ -34,18 +34,23 @@ public class Request {
         String userAgent = targetDevice.getUserAgent();
 
         //initialize Json Model for Request
-        MockRequestModel model = new MockRequestModel(width, height, position, ip, userAgent);
+         request = new MockRequestModel(width, height, position, ip, userAgent);
 
-        // initialize requestJson
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        requestJson = Objects.requireNonNull(gson.toJson(model));
     }
 
-    private boolean canPost() {
-        return StringUtils.isNotBlank(requestJson);
+    private boolean canPost(String json) {
+        return StringUtils.isNotBlank(json);
     }
 
     public String post() throws IOException {
+        // Build requestJson
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String requestJson = Objects.requireNonNull(gson.toJson(request));
+
+        if (!canPost(requestJson)) {
+            throw new IllegalStateException("Request Model has some issues");
+        }
+
         return OkHttpPostClient.post(targetServer, requestJson);
     }
 

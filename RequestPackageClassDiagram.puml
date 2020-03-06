@@ -1,26 +1,42 @@
 @startuml
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+class Request
+class OkHttpPostClient
+enum ServerType
+enum DeviceType
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
+Request --- OkHttpPostClient
+Request --- ServerType
+Request --- DeviceType
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class Request {
+    {field} - String RequestModel
+    {field} - ServerType targetServer
+    {method} + post()
+    {method} - canSend()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class OkHttpPostClient {
+    {static} post(json, server)
+}
+
+enum ServerType {
+    SD_API1
+    SD_API4
+
+    {method} getUrl()
+    {method} {static} getById(serverId)
+}
+
+enum DeviceType {
+    PC
+    MOBILE
+}
+
+class Response {
+    {field} response
+    {method} + replaceAuctionPrice()
+    {method} + getAdm()
 }
 
 @enduml

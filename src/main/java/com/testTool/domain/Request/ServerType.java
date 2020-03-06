@@ -1,4 +1,4 @@
-package com.testTool.domain;
+package com.testTool.domain.Request;
 
 import lombok.Getter;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,41 @@
 @startuml
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+participant UserInterface
+participant Controller
+participant Service
+participant BidRequest
+participant OkHttpPostClient
+participant BidResponse
+participant AdmatrixServer #98FB98
+
+UserInterface -> Controller: form
+
+Controller -> Controller: validate()
+Controller -> Service:
+
+create BidRequest
+Service -> BidRequest: <<new>>
+Service -> BidRequest: Post()
+
+BidRequest -> OkHttpPostClient: post(json, targetServer)
+
+OkHttpPostClient -> AdmatrixServer: bidRequest
+AdmatrixServer -> OkHttpPostClient: response'
+
+OkHttpPostClient -> BidRequest: response
+
+BidRequest -> Service: response
+
+create BidResponse
+Service -> BidResponse: <<new>>
+Service -> BidResponse: replaceAuctionPrice()
+BidResponse -> BidResponse
+BidResponse -> Service
+Service -> BidResponse: getAdm()
+BidResponse -> Service: adm
+
+Service -> Controller: adm
+
+Controller -> UserInterface: adm
+
 @enduml
