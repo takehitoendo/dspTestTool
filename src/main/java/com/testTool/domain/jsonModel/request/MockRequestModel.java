@@ -18,7 +18,7 @@ public class MockRequestModel {
 
     @SerializedName("id")
     @Expose
-    public String impId;
+    public String impId = ImpIdBuilder.build();
 
     @SerializedName("imp")
     @Expose
@@ -36,9 +36,8 @@ public class MockRequestModel {
     @Expose
     public final User user = new User();
 
-    public MockRequestModel(Integer width, Integer height, Integer position, String ip, String impId, String userAgent) {
+    public MockRequestModel(Integer width, Integer height, Integer position, String ip, String userAgent) {
         this.device = new Device(ip, userAgent);
-        this.impId = impId;
         this.imp.add(new Imp(width, height, position));
     }
 

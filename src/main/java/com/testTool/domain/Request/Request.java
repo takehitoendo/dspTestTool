@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import com.testTool.domain.jsonModel.request.MockRequestModel;
 import org.apache.commons.lang3.StringUtils;
 import lombok.Getter;
-import sun.net.www.http.HttpClient;
 
 // import module from java
 import java.io.IOException;
@@ -24,31 +23,30 @@ public class Request {
         Integer width = 300;
         Integer position = 1;
         String ip = "60.193.223.46";
-        String targetDeviceString = "MOBILE";
+        String targetDeviceTypeString = "MOBILE";
         String targetServerId = "sdapi04";
 
         // initialize targetServer
         targetServer = ServerType.getById(targetServerId);
 
-        // initialize impId
-        String impId = ImpIdBuilder.build();
-
         // initialize userAgent
-        TargetDeviceType targetDevice = TargetDeviceType.valueOf(targetDeviceString);
+        TargetDeviceType targetDevice = TargetDeviceType.valueOf(targetDeviceTypeString);
         String userAgent = targetDevice.getUserAgent();
 
         //initialize Json Model for Request
-        MockRequestModel model = new MockRequestModel(width, height, position, ip, impId, userAgent);
+        MockRequestModel model = new MockRequestModel(width, height, position, ip, userAgent);
 
         // initialize requestJson
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         requestJson = Objects.requireNonNull(gson.toJson(model));
     }
 
-    private String post() throws IOException {
-        OkHttpPostClient client = new OkHttpPostClient(targetServer, requestJson);
-        String bidResponse = client.post();
-        return bidResponse;
+    private boolean canPost() {
+        return StringUtils.isNotBlank(requestJson);
+    }
+
+    public String post() throws IOException {
+        return OkHttpPostClient.post(targetServer, requestJson);
     }
 
     public static void main(String[] args) {

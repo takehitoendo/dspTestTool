@@ -36,10 +36,10 @@ public class Device {
 
     @SerializedName("ua")
     @Expose
-    public String ua;
+    public String userAgent;
 
     Device(String ip, String userAgent) {
         this.ip = ip;
-        this.ua = userAgent;
+        this.userAgent = userAgent;
     }
 }

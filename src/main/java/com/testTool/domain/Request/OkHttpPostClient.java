@@ -1,34 +1,25 @@
-package com.testTool.domain;
+package com.testTool.domain.Request;
 
-import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
-import org.apache.catalina.Server;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
 public class OkHttpPostClient {
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-    //final HttpUrl endpoint;
-    final URL endpoint;
-    final String requestJson;
+    public static String post(ServerType server, String json) throws IOException {
+        if((server == null) || (StringUtils.isBlank(json))) throw new IllegalArgumentException();
 
-    OkHttpPostClient(ServerType server, String json) throws MalformedURLException {
-        if (StringUtils.isBlank(json)) throw new IllegalArgumentException("Request SHOULD NOT be blank");
+        URL endpoint = server.getURL();
+        String requestJson = json;
 
-        this.endpoint = server.getURL();
-        requestJson = json;
-    }
-
-    public String post() throws IOException {
         RequestBody body = RequestBody.create(requestJson, JSON);
         Request request = new Request.Builder().url(endpoint).post(body).build();
 
