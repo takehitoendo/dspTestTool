@@ -3,13 +3,17 @@ package com.testTool.domain.Request;
 // import modules from external libraries
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.testTool.domain.jsonModel.request.MockRequestModel;
 import org.apache.commons.lang3.StringUtils;
 import lombok.Getter;
 
 // import module from java
 import java.io.IOException;
 import java.util.Objects;
+
+// import class from other packages
+import com.testTool.domain.jsonModel.request.MockRequestModel;
+import com.testTool.domain.Response.Response;
+import org.springframework.http.ResponseEntity;
 
 @Getter
 public class Request {
@@ -24,7 +28,7 @@ public class Request {
         Integer position = 1;
         String ip = "60.193.223.46";
         String targetDeviceTypeString = "MOBILE";
-        String targetServerId = "sdapi01";
+        String targetServerId = "sdapi04";
 
         // initialize targetServer
         targetServer = ServerType.getById(targetServerId);
@@ -42,22 +46,26 @@ public class Request {
         return StringUtils.isNotBlank(json);
     }
 
-    public String post() throws IOException {
+    public Response post() throws IOException, IllegalStateException {
         // Build requestJson
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String requestJson = Objects.requireNonNull(gson.toJson(request));
+
+        System.out.println("Request Json");
+        System.out.println(requestJson);
 
         if (!canPost(requestJson)) {
             throw new IllegalStateException("Request Model has some issues");
         }
 
-        return OkHttpPostClient.post(targetServer, requestJson);
+        String responseString = OkHttpPostClient.post(targetServer, requestJson);
+        return new Response(responseString);
     }
 
     public static void main(String[] args) {
         Request sendRequest = new Request();
         try {
-            String res = sendRequest.post();
+            Response res = sendRequest.post();
             System.out.println(res);
 
         } catch (IOException e) {
